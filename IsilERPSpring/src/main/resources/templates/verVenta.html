@@ -1,0 +1,332 @@
+<!--
+=========================================================
+* Soft UI Dashboard - v1.0.7
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard
+* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" th:href="@{/assets/img/apple-icon.png}">
+  <link rel="icon" type="image/png" th:href="@{/assets/img/favicon.png}">
+  <title>
+    Área de Ventas
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link th:href="@{/assets/css/nucleo-icons.css}" rel="stylesheet" />
+  <link th:href="@{/assets/css/nucleo-svg.css}" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script th:src="@{https://kit.fontawesome.com/42d5adcbca.js}" crossorigin="anonymous"></script>
+  <link th:href="@{/assets/css/nucleo-svg.css}" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" th:href="@{/assets/css/soft-ui-dashboard.css?v=1.0.7}" rel="stylesheet" />
+  <!-- Nepcha Analytics (nepcha.com) -->
+  <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+  <script defer data-site="YOUR_DOMAIN_HERE" th:src="@{https://api.nepcha.com/js/nepcha-analytics.js}"></script>
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+    <div class="sidenav-header">
+      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+      <a class="navbar-brand m-0" th:href="@{https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html} " target="_blank">
+        <img th:src="@{/assets/img/logo-ct-dark.png}" class="navbar-brand-img h-100" alt="main_logo">
+        <span class="ms-1 font-weight-bold">Área de Ventas</span>
+      </a>
+    </div>
+    <hr class="horizontal dark mt-0">
+    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+     <div th:replace="fragments/sidebar :: sidebar"></div>
+    </div>
+  </aside>
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" th:href="@{/home/mostrarGestionVentas}">Sección Ventas</a></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Nueva Venta</li>
+          </ol>
+          <h6 class="font-weight-bolder mb-0">Tabla detalle Ventas</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div th:replace="fragments/logout :: logout"></div>
+        </div>
+      </div>
+    </nav>
+    <!-- end navbar -->
+
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <!-- Información de la Venta -->
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Venta</h6>
+            </div>
+	        <div class="card-body">
+	          <div class="row">
+	            <div class="mb-3 col-md-6">
+	              <label for="fechaVenta" class="form-label">Fecha de Venta</label>
+	              <input class="form-control" type="text" id="fechaVenta" th:value="${ventas.fechaVenta}" readonly disabled/>
+	            </div>
+	            <div class="mb-3 col-md-6">
+	              <label for="tipoVenta" class="form-label">Tipo de Venta</label>
+	              <input class="form-control" type="text" id="tipoVenta" th:value="${ventas.tipoVenta}" readonly disabled/>
+	            </div>
+	            <div class="mb-3 col-md-6">
+	              <label for="pedido" class="form-label">Pedido</label>
+	              <input class="form-control" type="text" id="pedido" th:value="${ventas.pedido.id}" readonly disabled/>
+	            </div>	            
+	          </div>
+	        </div>
+            </div>
+          </div>
+
+
+	      <div class="card mb-4">
+	        <div class="card-body">
+	        <h6>Información del cliente</h6>
+	          <div class="row">
+	            <div class="mb-3 col-md-6">
+	              <label for="pedido" class="form-label">Nombre</label>
+	              <input class="form-control" type="text" id="nombre" th:value="${ventas.pedido.cliente.nombre}" readonly disabled/>
+	            </div>
+	            <div class="mb-3 col-md-6">
+	              <label for="pedido" class="form-label">Nro del documento</label>
+	              <input class="form-control" type="text" id="nroDoc" th:value="${ventas.pedido.cliente.nroDoc}" readonly disabled/>
+	            </div>
+	            <div class="mb-3 col-md-6">
+	              <label for="pedido" class="form-label">Teléfono</label>
+	              <input class="form-control" type="text" id="telefono" th:value="${ventas.pedido.cliente.telefono}" readonly disabled/>
+	            </div>
+	            <div class="mb-3 col-md-6">
+	              <label for="pedido" class="form-label">Dirección</label>
+	              <input class="form-control" type="text" id="direccion" th:value="${ventas.pedido.cliente.direccion}" readonly disabled/>
+	            </div>
+	            <div class="mb-3 col-md-6">
+	              <label for="pedido" class="form-label">Correo</label>
+	              <input class="form-control" type="text" id="correo" th:value="${ventas.pedido.cliente.correo}" readonly disabled/>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+
+
+
+          <!-- Detalle de Venta -->
+          <div class="card mb-4">
+            <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+              <h6>Detalle de Venta</h6>
+              <button id="generate-pdf" class="btn btn-primary btn-sm">Generar PDF</button>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0" id="sales-table">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Venta</th>
+                      <th class="text-center">Producto</th>
+                      <th class="text-center">Precio Unitario</th>
+                      <th class="text-center">Cantidad</th>
+                      <th class="text-center">Precio Total del Producto</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="detalleVentas : ${listaDetalle}">
+                      <td class="text-center" th:text="${detalleVentas.ventas.id}"></td>
+                      <td class="text-center" th:text="${detalleVentas.articulo.nombre}"></td>
+                      <td class="text-center" th:text="${detalleVentas.articulo.precio}"></td>
+                      <td class="text-center" th:text="${detalleVentas.cantidad}"></td>
+                      <td class="text-center" th:text="${detalleVentas.precioItemTotal}"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="row">
+				<div class="mb-3 col-md-6">
+				  <label for="opGravada" class="form-label">OP Gravada</label>
+				  <input class="form-control" type="text" id="opGravada" readonly disabled />
+				</div>
+				
+				<div class="mb-3 col-md-6">
+				  <label for="igvAplicado" class="form-label">IGV</label>
+				  <input class="form-control" type="text" id="igvAplicado" readonly disabled />
+				</div>
+				
+				<div class="mb-3 col-md-6">
+				  <label for="precioTotal" class="form-label">Total</label>
+				  <input class="form-control" type="text" id="precioTotal" th:value="${ventas.precioTotal}" readonly disabled />
+				</div>
+				</div>
+
+			<script type="text/javascript">
+			document.addEventListener("DOMContentLoaded", function() {
+				  const precioTotalInput = document.getElementById("precioTotal");
+				  const opGravadaInput = document.getElementById("opGravada");
+				  const igvAplicadoInput = document.getElementById("igvAplicado");
+				
+				  // Leer el valor del precio total
+				  const precioTotal = parseFloat(precioTotalInput.value);
+				
+				  if (!isNaN(precioTotal)) {
+				
+				    // Calcular IGV Aplicado
+				    const igvAplicado = (precioTotal * 0.18).toFixed(2);
+				    igvAplicadoInput.value = igvAplicado;
+				    
+				    const opGravada = (precioTotal - parseFloat(igvAplicado)).toFixed(2);
+				    opGravadaInput.value = opGravada;
+				  }
+				});	              
+			</script>
+			</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<footer class="footer pt-3  ">
+        <div th:replace="fragments/footer :: footer"></div>
+      </footer>
+  </main>
+
+  <!-- JS PDF -->
+  
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+<script>
+document.getElementById('generate-pdf').addEventListener('click', async () => { 
+	  try {
+	    const { jsPDF } = window.jspdf;
+	    const pdf = new jsPDF({
+	      orientation: 'portrait',
+	      unit: 'mm',
+	      format: 'a4' // Cambiado a A4
+	    });
+
+	    const pageWidth = 210; // Ancho de una página A4 en mm
+	    const pageHeight = 297; // Alto de una página A4 en mm
+	    const margin = 10; // Margen más grande para A4
+
+	    const todayInput = document.getElementById('fechaVenta')?.value;
+	    let today = 'N/A';
+
+	    if (todayInput) {
+	      const [year, month, day] = todayInput.split('-'); 
+	      today = `${day}/${month}/${year}`;
+	    }
+
+	    pdf.setFontSize(10);
+	    pdf.setFont('Helvetica', 'normal');
+	    pdf.text(`Fecha: ${today}`, pageWidth - margin - 40, margin + 5);
+
+	    // Title
+	    pdf.setFontSize(14);
+	    pdf.setFont('Helvetica', 'bold');
+	    pdf.text('DETALLE DE VENTA', pageWidth / 2, margin + 15, { align: 'center' });
+
+	    // Reset font for details
+	    pdf.setFont('Helvetica', 'normal');
+	    pdf.setFontSize(10);
+
+	    // Client Information
+	    const clientInfoLabels = [
+	      { label: 'Nombre', id: 'nombre' },
+	      { label: 'Nro Documento', id: 'nroDoc' },
+	      { label: 'Teléfono', id: 'telefono' },
+	      { label: 'Dirección', id: 'direccion' },
+	      { label: 'Correo', id: 'correo' }
+	    ];
+
+	    // Draw Client Information
+	    let yPosition = margin + 25;
+	    pdf.setFontSize(12);
+	    pdf.text('Información del Cliente', margin, yPosition);
+	    yPosition += 7;
+
+	    pdf.setFontSize(10);
+	    clientInfoLabels.forEach(info => {
+	      const value = document.getElementById(info.id)?.value || 'N/A';
+	      pdf.text(`${info.label}: ${value}`, margin, yPosition);
+	      yPosition += 6;
+	    });
+
+	    // Table Header
+	    const table = document.getElementById('sales-table');
+	    let tableYPosition = yPosition + 10;
+	    pdf.setFontSize(10);
+	    pdf.setFont('Helvetica', 'bold');
+	    // Adding headers with spacing between columns
+	    pdf.text('Producto', margin, tableYPosition);
+	    pdf.text('Precio Unitario', margin + 60, tableYPosition); // Ajustar el espacio
+	    pdf.text('Cantidad', margin + 100, tableYPosition); // Ajustar el espacio
+	    pdf.text('Precio Total', margin + 140, tableYPosition); // Ajustar el espacio
+
+	    // Table Rows
+	    tableYPosition += 6;
+	    const rows = table.querySelectorAll('tbody tr');
+	    pdf.setFontSize(10);
+	    pdf.setFont('Helvetica', 'normal');
+	    rows.forEach(row => {
+	      const columns = row.querySelectorAll('td');
+	      const rowData = [
+	        columns[1].textContent.trim(), // Producto
+	        columns[2].textContent.trim(), // Precio Unitario
+	        columns[3].textContent.trim(), // Cantidad
+	        columns[4].textContent.trim()  // Precio Total
+	      ];
+
+	      // Adjusting the data to fit in the columns
+	      pdf.text(rowData[0], margin, tableYPosition);
+	      pdf.text(rowData[1], margin + 60, tableYPosition);
+	      pdf.text(rowData[2], margin + 100, tableYPosition);
+	      pdf.text(rowData[3], margin + 140, tableYPosition);
+	      tableYPosition += 6;
+	    });
+
+	    // Total Price
+	    const opgrava = document.getElementById('opGravada')?.value || 'N/A';
+	    const finalYPosition = tableYPosition + 10;
+	    pdf.setFontSize(12);
+	    pdf.text(`OP Gravada: ${opgrava}`, margin, finalYPosition);
+	    
+	    const igvAplicado = document.getElementById('igvAplicado')?.value || 'N/A';
+	    const finalYPosition2 = tableYPosition + 20;
+	    pdf.setFontSize(12);
+	    pdf.text(`I.G.V.: ${igvAplicado}`, margin, finalYPosition2);
+	    
+	    const totalPrice = document.getElementById('precioTotal')?.value || 'N/A';
+	    const finalYPosition3 = tableYPosition + 30;
+	    pdf.setFontSize(12);
+	    pdf.text(`Precio Total: ${totalPrice}`, margin, finalYPosition3);
+
+	    // Save the PDF
+	    pdf.save('boleta_venta.pdf');
+
+	  } catch (error) {
+	    console.error('Error generando PDF:', error);
+	    alert('Hubo un error al generar el PDF. Por favor, inténtelo de nuevo.');
+	  }
+	});
+
+</script>
+
+
+</body>
+</html>
